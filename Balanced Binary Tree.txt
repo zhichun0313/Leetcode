@@ -1,0 +1,32 @@
+110. Balanced Binary Tree
+
+class Solution {
+         // 1. 传入根节点
+         // 2. 返回是否为平衡二叉树
+    public boolean isBalanced(TreeNode root) {
+      
+         // 退出条件
+        // 1. 节点为空，则为平衡二叉树
+        if(root==null){
+            return true;
+        }
+        // 2. 左右节点不是平衡二叉树，则根节点不是平衡二叉树  
+        if(!isBalanced(root.left) || !isBalanced(root.right)){
+            return false;
+        }
+        // 1. 计算左节点深度
+        // 2. 计算右节点深度
+        // 3. 计算左右节点深度的差的绝对值是否>阈值1
+        return Math.abs(deep(root.left)-deep(root.right))>1?false:true;
+    }
+    // 1. 传入根节点
+    // 2. 返回深度
+    private int deep(TreeNode root){
+        if(null==root){
+            return 0;
+        }
+         // 单层逻辑
+        // 深度=Max(左节点深度,右节点深度)+1 
+        return Math.max(deep(root.left),deep(root.right))+1;
+    }
+}
